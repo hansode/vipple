@@ -1,5 +1,5 @@
-viple
-=====
+vipple
+======
 
 simple virtual ip address handler.
 
@@ -9,24 +9,24 @@ Installation
 ------------
 
 ```
-$ sudo install -m 755 viple /etc/init.d/viple
-$ sudo chkconfig --add viple
-$ sudo mkdir /etc/viple
+$ sudo install -m 755 vipple /etc/init.d/vipple
+$ sudo chkconfig --add vipple
+$ sudo mkdir /etc/vipple
 ```
 
 Operation
 ---------
 
 ```
-$ sudo /etc/init.d/viple start
+$ sudo /etc/init.d/vipple start
 ```
 
 ```
-$ sudo /etc/init.d/viple stop
+$ sudo /etc/init.d/vipple stop
 ```
 
 ```
-$ sudo /etc/init.d/viple status
+$ sudo /etc/init.d/vipple status
 ```
 
 Configuration
@@ -34,12 +34,12 @@ Configuration
 
 config file path
 
-+ /etc/viple/vip-[0-9][0-9][0-9].conf
++ /etc/vipple/vip-[0-9][0-9][0-9].conf
 
 Examples
 --------
 
-/etc/viple/vip-001.conf
+/etc/vipple/vip-001.conf
 
 ```
 BIND_INTERFACE="eth0"

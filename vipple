@@ -5,7 +5,7 @@
 # description: Starts and stops the virtual ip address
 
 ### BEGIN INIT INFO
-# Provides: lsb-viple
+# Provides: lsb-vipple
 # Required-Start: $local_fs $network $remote_fs
 # Required-Stop: $local_fs $network $remote_fs
 # Default-Start:
@@ -39,8 +39,8 @@ get_files() {
 }
 
 prog=$"simple virtual ip address handler"
-LOGGER="/usr/bin/logger -p daemon.notice -t viple"
-CONFDIR=/etc/viple
+LOGGER="/usr/bin/logger -p daemon.notice -t vipple"
+CONFDIR=/etc/vipple
 
 common_proc() {
   local blk="$(cat)"
@@ -84,14 +84,14 @@ EOS
 
   # failure/success or warning if launch worked with some vip errors
   if [ ${RETVAL} -eq 0 -a ${VIP_RETVAL} -eq 0 ]; then
-    ${LOGGER} "all viple configurations were applied successfully"
+    ${LOGGER} "all vipple configurations were applied successfully"
     success
-    touch /var/lock/subsys/viple
+    touch /var/lock/subsys/vipple
   elif [ ${RETVAL} -eq 0 -a ${VIP_RETVAL} -eq 1 ]; then
-    ${LOGGER} "error in one or more of the viple configurations"
+    ${LOGGER} "error in one or more of the vipple configurations"
     warning
   else
-    ${LOGGER} "error running one or more of the viple instances"
+    ${LOGGER} "error running one or more of the vipple instances"
     failure
   fi
 
@@ -112,12 +112,12 @@ EOS
 
   # failure/success (no warning, too complicated to handle properly)
   if [ ${RETVAL} -eq 1 ]; then
-    ${LOGGER} "it seems like no viple were running"
+    ${LOGGER} "it seems like no vipple were running"
     failure
   else
     ${LOGGER} "all IP addresses unassigned"
     success
-    rm -f /var/lock/subsys/viple
+    rm -f /var/lock/subsys/vipple
   fi
 
   echo
