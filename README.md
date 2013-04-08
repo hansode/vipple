@@ -1,7 +1,7 @@
 vipple
 ======
 
-simple virtual ip address handler.
+A simple virtual ip address handling framework.
 
 + CARP-less [UCARP](https://github.com/jedisct1/UCarp).
 
