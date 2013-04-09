@@ -73,7 +73,10 @@ start() {
   common_proc <<'EOS'
     RETVAL=0
 
-    [[ -x "${UPSCRIPT}" ]] && ${UPSCRIPT}
+    [[ -x "${UPSCRIPT}" ]] && {
+      ${UPSCRIPT}
+      RETVAL=1
+    }
 
     /sbin/ip addr add ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
     LAUNCH_RETVAL=$?
@@ -107,7 +110,10 @@ stop() {
     LAUNCH_RETVAL=$?
     [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
 
-    [[ -x "${DOWNSCRIPT}" ]] && ${DOWNSCRIPT}
+    [[ -x "${DOWNSCRIPT}" ]] && {
+      ${DOWNSCRIPT}
+      RETVAL=1
+    }
 EOS
 
   # failure/success (no warning, too complicated to handle properly)
