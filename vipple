@@ -73,11 +73,6 @@ start() {
   common_proc <<'EOS'
     RETVAL=0
 
-    [[ -x "${UPSCRIPT}" ]] && {
-      ${UPSCRIPT}
-      RETVAL=1
-    }
-
     /bin/ping -q -c 3 ${VIP_ADDRESS} && RETVAL=1
     if [ ${RETVAL} -eq 0 ]; then
       /sbin/ip addr add ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
@@ -85,6 +80,10 @@ start() {
       [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
 
       /sbin/arping -q -A -I ${BIND_INTERFACE} -c 1 ${VIP_ADDRESS}
+
+      [[ -x "${UPSCRIPT}" ]] && {
+        ${UPSCRIPT} || RETVAL=1
+      }
     fi
 EOS
 
@@ -109,14 +108,13 @@ stop() {
   common_proc <<'EOS'
     RETVAL=0
 
+    [[ -x "${DOWNSCRIPT}" ]] && {
+      ${DOWNSCRIPT} || RETVAL=1
+    }
+
     /sbin/ip addr del ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
     LAUNCH_RETVAL=$?
     [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
-
-    [[ -x "${DOWNSCRIPT}" ]] && {
-      ${DOWNSCRIPT}
-      RETVAL=1
-    }
 EOS
 
   # failure/success (no warning, too complicated to handle properly)
