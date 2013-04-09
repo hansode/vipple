@@ -78,11 +78,14 @@ start() {
       RETVAL=1
     }
 
-    /sbin/ip addr add ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
-    LAUNCH_RETVAL=$?
-    [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
+    /bin/ping -q -c 3 ${VIP_ADDRESS} && RETVAL=1
+    if [ ${RETVAL} -eq 0 ]; then
+      /sbin/ip addr add ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
+      LAUNCH_RETVAL=$?
+      [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
 
-    /sbin/arping -q -A -I ${BIND_INTERFACE} -c 1 ${VIP_ADDRESS}
+      /sbin/arping -q -A -I ${BIND_INTERFACE} -c 1 ${VIP_ADDRESS}
+    fi
 EOS
 
   # failure/success or warning if launch worked with some vip errors
