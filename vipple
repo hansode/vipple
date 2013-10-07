@@ -47,7 +47,7 @@ common_proc() {
 
   for FILE in $(get_files); do
     TMP_RETVAL=0
-    unset ID BIND_INTERFACE VIP_ADDRESS OPTIONS UPSCRIPT DOWNSCRIPT
+    unset ID BIND_INTERFACE VIP_ADDRESS OPTIONS UPSCRIPT DOWNSCRIPT PREFIX BROADCAST
 
     [[ -f ${CONFDIR}/vip-common.conf ]] && . ${CONFDIR}/vip-common.conf
     . ${CONFDIR}/${FILE}
