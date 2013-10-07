@@ -48,3 +48,10 @@ VIP_ADDRESS="192.0.2.10"
 UPSCRIPT=
 DOWNSCRIPT=
 ```
+
+License
+-------
+
+[Beerware](http://en.wikipedia.org/wiki/Beerware) license.
+
+If we meet some day, and you think this stuff is worth it, you can buy me a beer in return.
