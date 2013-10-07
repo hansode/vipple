@@ -75,7 +75,7 @@ start() {
 
     /bin/ping -q -c 3 ${VIP_ADDRESS} && RETVAL=1
     if [ ${RETVAL} -eq 0 ]; then
-      /sbin/ip addr add ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
+      /sbin/ip addr add ${VIP_ADDRESS}/${PREFIX:-32} dev ${BIND_INTERFACE} $([[ -n "${BROADCAST}" ]] && echo broadcast ${BROADCAST})
       LAUNCH_RETVAL=$?
       [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
 
@@ -112,7 +112,7 @@ stop() {
       ${DOWNSCRIPT} || RETVAL=1
     }
 
-    /sbin/ip addr del ${VIP_ADDRESS}/32 dev ${BIND_INTERFACE}
+    /sbin/ip addr del ${VIP_ADDRESS}/${PREFIX:-32} dev ${BIND_INTERFACE} $([[ -n "${BROADCAST}" ]] && echo broadcast ${BROADCAST})
     LAUNCH_RETVAL=$?
     [[ ${LAUNCH_RETVAL} -ne 0 ]] && RETVAL=1
 EOS
