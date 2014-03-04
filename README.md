@@ -10,8 +10,16 @@ Installation
 
 ```
 $ sudo mkdir /etc/vipple
-$ sudo install -m 755 vipple /etc/init.d/vipple
+```
+
+```
+$ sudo install -m 755  vipple /etc/init.d/vipple
 $ sudo chkconfig --add vipple
+```
+
+```
+$ sudo install -m 755  vipple-zero /etc/init.d/vipple-zero
+$ sudo chkconfig --add vipple-zero
 ```
 
 Operation
@@ -19,14 +27,14 @@ Operation
 
 ```
 $ sudo /etc/init.d/vipple start
-```
-
-```
 $ sudo /etc/init.d/vipple stop
+$ sudo /etc/init.d/vipple status
 ```
 
 ```
-$ sudo /etc/init.d/vipple status
+$ sudo /etc/init.d/vipple-zero start
+$ sudo /etc/init.d/vipple-zero stop
+$ sudo /etc/init.d/vipple-zero status
 ```
 
 Configuration
