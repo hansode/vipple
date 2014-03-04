@@ -20,3 +20,4 @@ function setup_service() {
 }
 
 setup_service vipple
+setup_service vipple-zero
