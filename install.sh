@@ -9,7 +9,7 @@ set -o pipefail
 set -x
 
 function setup_service() {
-  local name=vipple
+  local name=${1:-vipple}
 
   mkdir -p /etc/${name}
 
