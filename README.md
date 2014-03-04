@@ -9,9 +9,9 @@ Installation
 ------------
 
 ```
+$ sudo mkdir /etc/vipple
 $ sudo install -m 755 vipple /etc/init.d/vipple
 $ sudo chkconfig --add vipple
-$ sudo mkdir /etc/vipple
 ```
 
 Operation
