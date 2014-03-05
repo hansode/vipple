@@ -40,9 +40,29 @@ $ sudo service vipple-zero status
 Configuration
 -------------
 
-config file path
+### Config File Path
 
 + /etc/vipple/vip-[0-9][0-9][0-9].conf
+
+### Configuarable Parameters
+
+Network Interface Configuration:
+
++ BIND_INTERFACE
+  + *Required* **string**
++ VIP_ADDRESS
+  + *Required* **string**
++ PREFIX
+  + *Optional* **int**
++ BROADCAST
+  + *Optional* **string**
+
+Hooks:
+
++ UPSCRIPT
+  + *Optional* **string**
++ DOWNSCRIPT
+  + *Optional* **string**
 
 Examples
 --------
