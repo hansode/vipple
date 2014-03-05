@@ -76,8 +76,6 @@ start() {
 
     /sbin/ip addr show ${BIND_INTERFACE} | grep -q -w ${VIP_ADDRESS} && RETVAL=1
     if [ ${RETVAL} -eq 0 ]; then
-     #/sbin/arping -q -A -I ${BIND_INTERFACE} -c 1 ${VIP_ADDRESS}
-
       [[ -x "${UPSCRIPT}" ]] && {
         ${UPSCRIPT} || RETVAL=1
       }
