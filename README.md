@@ -26,15 +26,15 @@ Operation
 ---------
 
 ```
-$ sudo /etc/init.d/vipple start
-$ sudo /etc/init.d/vipple stop
-$ sudo /etc/init.d/vipple status
+$ sudo service vipple start
+$ sudo service vipple stop
+$ sudo service vipple status
 ```
 
 ```
-$ sudo /etc/init.d/vipple-zero start
-$ sudo /etc/init.d/vipple-zero stop
-$ sudo /etc/init.d/vipple-zero status
+$ sudo service vipple-zero start
+$ sudo service vipple-zero stop
+$ sudo service vipple-zero status
 ```
 
 Configuration
