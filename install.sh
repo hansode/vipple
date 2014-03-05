@@ -11,8 +11,6 @@ set -x
 function setup_service() {
   local name=${1:-vipple}
 
-  mkdir -p /etc/${name}
-
   install -m 755 ${name} /etc/init.d/${name}
 
   chkconfig --add  ${name}
@@ -21,3 +19,5 @@ function setup_service() {
 
 setup_service vipple
 setup_service vipple-zero
+
+mkdir -p /etc/vipple
