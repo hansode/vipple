@@ -74,7 +74,9 @@ start() {
   common_proc <<'EOS'
     RETVAL=0
 
-    /sbin/ip addr show ${BIND_INTERFACE} | grep -q -w ${VIP_ADDRESS} && RETVAL=1
+    if [[ -z "${force}" ]]; then
+      /sbin/ip addr show ${BIND_INTERFACE} | grep -q -w ${VIP_ADDRESS} && RETVAL=1
+    fi
     if [ ${RETVAL} -eq 0 ]; then
       [[ -x "${UPSCRIPT}" ]] && {
         ${UPSCRIPT} || RETVAL=1
@@ -113,7 +115,6 @@ EOS
     ${LOGGER} "it seems like no ${prog} were running"
     failure
   else
-    ${LOGGER} "all IP addresses unassigned"
     success
     rm -f ${lockfile}
   fi
@@ -129,6 +130,11 @@ EOS
 
 case "$1" in
 start)
+  force=
+  start
+  ;;
+force-start)
+  force=true
   start
   ;;
 stop)
@@ -142,7 +148,7 @@ status)
   status
   ;;
 *)
-  echo $"Usage: $0 {start|stop|restart|status}"
+  echo $"Usage: $0 {start|force-start|stop|restart|status}"
   exit 1
 esac
 

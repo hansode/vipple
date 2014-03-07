@@ -33,6 +33,7 @@ $ sudo service vipple status
 
 ```
 $ sudo service vipple-zero start
+$ sudo service vipple-zero force-start
 $ sudo service vipple-zero stop
 $ sudo service vipple-zero status
 ```
