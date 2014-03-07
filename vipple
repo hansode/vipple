@@ -38,8 +38,9 @@ get_files() {
   done
 }
 
-prog=$"simple virtual ip address handler"
-LOGGER="/usr/bin/logger -p daemon.notice -t vipple"
+prog=$"vipple"
+lockfile=/var/lock/subsys/${prog}
+LOGGER="/usr/bin/logger -p daemon.notice -t ${prog}"
 CONFDIR=/etc/vipple
 
 common_proc() {
@@ -103,14 +104,14 @@ EOS
 
   # failure/success or warning if launch worked with some vip errors
   if [ ${RETVAL} -eq 0 -a ${VIP_RETVAL} -eq 0 ]; then
-    ${LOGGER} "all vipple configurations were applied successfully"
+    ${LOGGER} "all ${prog} configurations were applied successfully"
     success
-    touch /var/lock/subsys/vipple
+    touch ${lockfile}
   elif [ ${RETVAL} -eq 0 -a ${VIP_RETVAL} -eq 1 ]; then
-    ${LOGGER} "error in one or more of the vipple configurations"
+    ${LOGGER} "error in one or more of the ${prog} configurations"
     warning
   else
-    ${LOGGER} "error running one or more of the vipple instances"
+    ${LOGGER} "error running one or more of the ${prog} instances"
     failure
   fi
 
@@ -133,12 +134,12 @@ EOS
 
   # failure/success (no warning, too complicated to handle properly)
   if [ ${RETVAL} -eq 1 ]; then
-    ${LOGGER} "it seems like no vipple were running"
+    ${LOGGER} "it seems like no ${prog} were running"
     failure
   else
     ${LOGGER} "all IP addresses unassigned"
     success
-    rm -f /var/lock/subsys/vipple
+    rm -f ${lockfile}
   fi
 
   echo
